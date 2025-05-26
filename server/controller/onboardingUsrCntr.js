@@ -13,7 +13,7 @@ export const userSignUp = async (req, res) => {
     if (pass != cnfPass) {
       return res
         .status(400)
-        .json({ message: "Confirm password didn't match with the password" });
+        .json({ message: "Passwords do not match" });
     }
 
     const existingUser = await User.findOne({ email });
