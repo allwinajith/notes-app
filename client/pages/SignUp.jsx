@@ -1,9 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import useApi from "../hooks/useApi";
+import { UserContext } from "../context/userContext";
+import { useContext } from "react";
 
 function Register() {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
   const { sendRequest, loading, error } = useApi();
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -25,7 +28,10 @@ function Register() {
     });
 
     if (result) {
-      console.log("Registered:", result);
+      localStorage.setItem("token", JSON.stringify(result.token));
+      localStorage.setItem("user", JSON.stringify(result.user));
+      setUser(result.user);
+      navigate("/notes");
     }
 
     e.target.username.value = "";

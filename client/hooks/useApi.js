@@ -20,7 +20,7 @@ const useApi = () => {
         if (!token) {
           throw new Error("Authentication token not found. Please login.");
         }
-        headers.Authorization = `Bearer ${token}`;
+        headers.Authorization = `Bearer ${JSON.parse(token)}`;
       }
       const response = await axios({ url, method, data, headers });
       return response.data;

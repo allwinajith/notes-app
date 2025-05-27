@@ -1,8 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import useApi from "../hooks/useApi";
+import { UserContext } from "../context/userContext";
+import { useContext } from "react";
 
 function Login() {
+  const {setUser} = useContext(UserContext)
   const navigate = useNavigate();
 
   const { sendRequest, loading, error } = useApi();
@@ -24,8 +27,10 @@ function Login() {
 
     if (result) {
       localStorage.setItem("token", JSON.stringify(result.token));
-      navigate('/notes')
-      // console.log("Logged in:", result.token);
+      localStorage.setItem("user", JSON.stringify(result.user));
+      setUser(result.user);
+      navigate("/notes");
+      console.log("Logged in:", result);
     }
   };
 

@@ -1,8 +1,4 @@
-import {
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Route, Routes, useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import Login from "../pages/Login";
 import SignUp from "../pages/SignUp";
@@ -15,24 +11,30 @@ function App() {
   const location = useLocation();
   const isAuthPage =
     location.pathname === "/" || location.pathname === "/register";
+  const isAuthenticated = localStorage.getItem("token");
+
+  if (!isAuthenticated && !isAuthPage) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
-      <div className="appWrapper">
-        {!isAuthPage && <Header />}
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/register" element={<SignUp />} />
-            <Route
-              path="/notes"
-              element={
-                <ProtectedRoute>
-                  <Notes />
-                </ProtectedRoute>
-              }
-            />
-          </Routes>
-        </Layout>
-      </div>
+    <div className="appWrapper">
+      {!isAuthPage && <Header />}
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route
+            path="/notes"
+            element={
+              <ProtectedRoute>
+                <Notes />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Layout>
+    </div>
   );
 }
 

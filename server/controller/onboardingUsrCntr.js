@@ -81,7 +81,7 @@ export const userSignIn = async (req, res) => {
 
     res.status(200).json({
       token,
-      user: { id: user._id, userName: user.userName, email: user.email },
+      user: { id: user._id, userName: user.username, email: user.email },
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
