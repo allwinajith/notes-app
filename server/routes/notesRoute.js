@@ -1,5 +1,13 @@
-// import express from 'express'
+import express from 'express'
+import { createNote, deleteNote, getNotes, updateNote } from "../controller/notesController.js";
+import { authMiddleware } from "../middleware/auth_mid.js";
 
-// const route = express.Router()
+const notesRoute = express.Router()
+notesRoute.use(authMiddleware);
 
-// route.post('register',  )
+notesRoute.get("/", getNotes);
+notesRoute.post("/", createNote);
+notesRoute.put("/:id", updateNote);
+notesRoute.delete("/:id", deleteNote);
+
+export default notesRoute;
