@@ -14,15 +14,26 @@ export const userSignUp = async (req, res) => {
       return res.status(400).json({ message: "Passwords do not match" });
     }
 
-    const existingUser = await User.findOne({ email });
+    const existingUserByEmail = await User.findOne({ email });
+    const existingUserByUsername = await User.findOne({ username: userName });
 
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+    if (existingUserByEmail && existingUserByUsername) {
+      return res.status(400).json({
+        message: "Email already exists. Please try to login",
+      });
+    } else if (existingUserByUsername) {
+      return res.status(400).json({
+        message: "Username already taken. Please try a different username.",
+      });
+    } else if (existingUserByEmail) {
+      return res.status(400).json({
+        message: "Email already registered. Please use a different email.",
+      });
     }
     const hashedPass = await bcrypt.hash(pass, 10);
     const newUser = await User.create({
-      username : userName,
-      email : email,
+      username: userName,
+      email: email,
       password: hashedPass,
     });
 
@@ -56,7 +67,7 @@ export const userSignIn = async (req, res) => {
     if (!user) {
       return res
         .status(401)
-        .json({ message:"User not found. Please sign up first"});
+        .json({ message: "User not found. Please sign up first" });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);

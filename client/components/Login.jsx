@@ -1,38 +1,55 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
+import useApi from "../hooks/useApi";
 
 function Login() {
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const { sendRequest, loading, error } = useApi();
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log("Logging in with:", { email, password });
+    e.target.email.value = "";
+    e.target.password.value = "";
+
+    const result = await sendRequest({
+      url: "http://localhost:3000/api/auth/login",
+      method: "POST",
+      data: { email, password },
+    });
+
+    if (result) {
+      console.log("Logged in:", result);
+    }
   };
 
   return (
     <div className="loginContainer">
       <div className="windowBar">
-        <span className="dot red"></span>
-        <span className="dot yellow"></span>
-        <span className="dot green"></span>
+        <div className="dotsRight">
+          <span className="dot red"></span>
+          <span className="dot yellow"></span>
+          <span className="dot green"></span>
+        </div>
         <span className="windowTitle">Login</span>
       </div>
 
       <div className="loginHeader">Login</div>
       <form className="loginBody" onSubmit={handleLogin}>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" placeholder="email" name="email" required />
 
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" required />
+        <input type="password" id="password" placeholder="Password" name="password" required />
 
         <div className="buttonGroup">
-          <button type="submit" className="loginBtn">
-            Login
+          <button type="submit" disabled={loading} className="loginBtn">
+            {loading ? "Logging in..." : "Login"}
           </button>
+          {error && alert(error)}
           <button
             type="button"
             className="registerBtn"
