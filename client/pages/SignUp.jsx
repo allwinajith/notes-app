@@ -21,11 +21,17 @@ function Register() {
       url: "http://localhost:3000/api/auth/register",
       method: "POST",
       data: { userName, email, pass, cnfPass },
+      withAuth: false,
     });
 
     if (result) {
       console.log("Registered:", result);
     }
+
+    e.target.username.value = "";
+    e.target.email.value = "";
+    e.target.password.value = "";
+    e.target.confirmPassword.value = "";
   };
 
   return (

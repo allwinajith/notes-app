@@ -19,10 +19,13 @@ function Login() {
       url: "http://localhost:3000/api/auth/login",
       method: "POST",
       data: { email, password },
+      withAuth: false,
     });
 
     if (result) {
-      console.log("Logged in:", result);
+      localStorage.setItem("token", JSON.stringify(result.token));
+      navigate('/notes')
+      // console.log("Logged in:", result.token);
     }
   };
 
@@ -40,10 +43,22 @@ function Login() {
       <div className="loginHeader">Login</div>
       <form className="loginBody" onSubmit={handleLogin}>
         <label htmlFor="email">Email</label>
-        <input type="email" id="email" placeholder="email" name="email" required />
+        <input
+          type="email"
+          id="email"
+          placeholder="email"
+          name="email"
+          required
+        />
 
         <label htmlFor="password">Password</label>
-        <input type="password" id="password" placeholder="Password" name="password" required />
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          name="password"
+          required
+        />
 
         <div className="buttonGroup">
           <button type="submit" disabled={loading} className="loginBtn">
