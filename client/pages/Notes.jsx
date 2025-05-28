@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../src/context/UserContext";
 import "../styles/notes.css";
 import { TiDocumentAdd } from "react-icons/ti";
 import useApi from "../hooks/useApi";
@@ -95,8 +95,11 @@ function Notes() {
 
     if (response) {
       alert("Note updated successfully!");
-      setNotes((prevNotes) =>
-        prevNotes.map((note) => (note._id === currentNoteId ? response : note)) // Changed from 'id' to '_id'
+      setNotes(
+        (prevNotes) =>
+          prevNotes.map((note) =>
+            note._id === currentNoteId ? response : note
+          ) // Changed from 'id' to '_id'
       );
       handleClose();
     } else {
@@ -104,7 +107,8 @@ function Notes() {
     }
   };
 
-  const handleDelete = async (noteId) => { // Added noteId parameter
+  const handleDelete = async (noteId) => {
+    // Added noteId parameter
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this note?"
     );
@@ -118,10 +122,11 @@ function Notes() {
 
     if (response) {
       alert("Note deleted successfully!");
-      setNotes((prevNotes) =>
-        prevNotes.filter((note) => note._id !== noteId) // Changed from 'id' to '_id'
+      setNotes(
+        (prevNotes) => prevNotes.filter((note) => note._id !== noteId) // Changed from 'id' to '_id'
       );
-      if (noteId === currentNoteId) { // Only close if deleting the currently edited note
+      if (noteId === currentNoteId) {
+        // Only close if deleting the currently edited note
         handleClose();
       }
     } else {

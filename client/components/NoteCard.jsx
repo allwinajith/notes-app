@@ -1,6 +1,5 @@
 import React from "react";
-import "../styles/NoteCard.css";
-
+import "../styles/notecard.css";
 function NoteCard({ title, content, lastModified, onEdit, onDelete }) {
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
