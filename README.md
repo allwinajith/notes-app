@@ -27,10 +27,10 @@ A simple **Notes Management App** with user authentication (JWT), allowing users
 
 Create a `.env` file inside the **`server`** directory with the following content:
 
-NODE_ENV=development
-MONGO_URI=YOUR_LOCAL_MONGO_URI
-HOST=localhost
-PORT=3000
+NODE_ENV=development,
+MONGO_URI=YOUR_LOCAL_MONGO_URI,
+HOST=localhost,
+PORT=3000,
 JWT_SECRET=your_jwt_secret_key
 
 > Replace the placeholder values with your actual MongoDB URI and JWT secret.
