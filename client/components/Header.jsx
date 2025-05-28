@@ -4,6 +4,10 @@ import "../styles/header.css";
 function Header() {
   const navigate = useNavigate();
   const handleLogout = () => {
+    const perm = confirm("Are you sure, You want to logout?");
+    if (!perm) {
+      return;
+    }
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/", { replace: true });

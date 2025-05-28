@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import Notes from "../pages/Notes";
 import ProtectedRoute from "../components/ProtectedRoute";
+import About from "../pages/About";
+import Account from "../pages/Account";
 
 function App() {
   const location = useLocation();
@@ -29,6 +31,22 @@ function App() {
             element={
               <ProtectedRoute>
                 <Notes />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Account />
               </ProtectedRoute>
             }
           />

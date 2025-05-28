@@ -1,0 +1,58 @@
+.note-card {
+  width: 230px;
+  height: 200px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background: #fff8ef;
+  transition: box-shadow 0.3s ease;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.note-card:hover {
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.note-header {
+  background-color: #f3caa3;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-actions {
+  display: none;
+  gap: 5px;
+}
+
+.note-card:hover .note-actions {
+  display: flex;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.note-content {
+  flex: 1;
+  overflow-y: auto;
+  word-wrap: break-word;
+  white-space: normal;
+  font-size: 14px;
+  color: #444;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+
+.note-footer {
+  font-size: 12px;
+  color: #555;
+  text-align: right;
+  padding-top: 5px;
+}

@@ -1,13 +1,14 @@
-/* .appWrapper {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background-color: #fef4e8;
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-.layoutContainer {
-  flex: 1;
+.appWrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+  flex-direction: column;
+  height: 100%;
+  background-color: #fef4e8;
+}
